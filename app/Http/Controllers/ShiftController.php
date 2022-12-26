@@ -49,8 +49,6 @@ class ShiftController extends Controller
 
         $shifts = $this->shiftBLL->getAllShifts();
 
-        $shifts->load('worker');
-
         return inertia('Shift/List',[
             'shifts' => $shifts,
             'links' => [
