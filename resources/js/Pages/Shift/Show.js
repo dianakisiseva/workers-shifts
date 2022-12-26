@@ -1,10 +1,12 @@
 import React from 'react';
 import {SHIFTS, STATUSES, STATUS} from "../../Shared/Constants";
+import Menu from "../../Shared/Menu";
 
 export default function Show(props) {
     const {shift} = props
     return (<>
-            <div className="container">
+            <Menu/>
+            <div className='container pt-4' >
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
@@ -61,13 +63,13 @@ export default function Show(props) {
                                             <p>{STATUSES[shift.status]}</p>
                                         </div>
                                     </div>
-                                    { shift.status === STATUS.COMPLETE &&
-                                    <div className="col-6 mb-2">
-                                        <div className="form-group">
-                                            <b>Paid at:</b>
-                                            <p>{shift.paid_at}</p>
+                                    {shift.status === STATUS.COMPLETE &&
+                                        <div className="col-6 mb-2">
+                                            <div className="form-group">
+                                                <b>Paid at:</b>
+                                                <p>{shift.paid_at}</p>
+                                            </div>
                                         </div>
-                                    </div>
                                     }
                                 </div>
                                 <div className="row">

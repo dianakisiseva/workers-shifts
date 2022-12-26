@@ -7,6 +7,7 @@ import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import {SHIFTS, STATUS, STATUSES} from "../../Shared/Constants";
 import {route} from "../../Shared/route";
+import Menu from "../../Shared/Menu";
 
 export default function CreateEdit(props) {
     const {shift, links, options} = props
@@ -53,13 +54,14 @@ export default function CreateEdit(props) {
 
 
     return (<>
+            <Menu/>
             <form
                 onSubmit={(e) => {
                     handleSubmit(e)
                 }}
             >
 
-                <div className="container">
+                <div className='container pt-4' >
                     <div className="row">
                         <div className="col-12">
                             <div className="card">

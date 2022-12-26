@@ -30,7 +30,7 @@ class ShiftBLL extends BaseBLL
                 'taxable' => $shift[5] == 'Yes',
                 'status' => $this->getShiftStatus($shift[6]),
                 'shift_type' => $this->getShiftType($shift[7]),
-                'paid_at' => $shift[8] ?? null,
+                'paid_at' => $shift[8] ?: null,
             ];
 
             $worker = $this->workerBLL->getOrCreateWorker($data['worker_name']);
@@ -47,13 +47,15 @@ class ShiftBLL extends BaseBLL
                 'paid_at' => $data['paid_at'],
                 'total_pay' => $data['hours'] * ltrim($data['rate_per_hour'], '£')
             ]);
-//
-//            $shift->update([
-//                'total_pay' => $shift->hours * $shift->rate_per_hour
-//            ]);
-
         }
     }
+
+    public function getAllShifts()
+    {
+//        return $this->model->with('worker')->get();
+       return $this->model->with('worker')->get()->take(20); //for faster testing
+    }
+
     public function getShiftStatus($status)
     {
         switch ($status) {

@@ -38,7 +38,12 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'app' => [
-                'name' => config('app.name')
+                'name' => config('app.name'),
+                'links' => [
+                    'workers' => route('workers.list'),
+                    'shifts' => route('shifts.list'),
+                    'shifts_import' => route('shifts.import')
+                ]
             ],
         ]);
     }

@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 import MaterialReactTable from "material-react-table";
 import {SHIFTS, STATUSES} from "../../Shared/Constants";
+import Menu from "../../Shared/Menu";
 
 export default function Show(props) {
 
@@ -47,9 +48,9 @@ export default function Show(props) {
 
         ], []
     )
-    // CATEGORIES[activity.category_id]
     return (<>
-            <div className="container">
+            <Menu/>
+            <div className='container pt-4' >
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
@@ -89,7 +90,6 @@ export default function Show(props) {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import {Edit, Delete, Visibility} from "@mui/icons-material";
 import {route} from "../../Shared/route";
 import axios from "axios";
 import {useToasts} from "react-toast-notifications";
+import Menu from "../../Shared/Menu";
 
 export default function List(props) {
     const [tableData, setTableData] = useState(() => props.shifts);
@@ -95,45 +96,45 @@ export default function List(props) {
 
 
     return <>
-                <div className="table-striped">
-                    <h3>Shifts</h3>
-                    <MaterialReactTable
-                        columns={columns}
-                        data={props.shifts}
-                        positionActionsColumn="first"
-                        enableRowActions={true}
-                        displayColumnDefOptions={{
-                            'mrt-row-actions': {
-                                header: '',
-                                size: 100,
-                            },
-                        }}
-                        renderRowActions={({row}) => (
-                            <Box sx={{display: 'flex', gap: '1rem'}}>
-                                <Tooltip arrow placement="left" title="Edit">
-                                    <InertiaLink
-                                        href={ row.original.status === STATUS.COMPLETE ?
-                                            route(props.links.show, {shift: row.original.id}) :
-                                            route(props.links.edit, {shift: row.original.id})}>
-                                        {row.original.status === STATUS.COMPLETE ? <Visibility/> : <Edit/>}
-                                    </InertiaLink>
-                                </Tooltip>
-                                <Tooltip arrow placement="right" title="Delete">
-                                    <InertiaLink
-                                        onClick={() => handleDeleteShift(row.original)}>
-                                        <Delete/>
-                                    </InertiaLink>
-                                </Tooltip>
-                            </Box>
-                        )}
-                        renderTopToolbarCustomActions={() => (
-                            <InertiaLink className="btn btn-primary"
-                                         href={route(props.links.create)}>
-                                Create new shift
+        <Menu/>
+        <div className="table-striped">
+            <MaterialReactTable
+                columns={columns}
+                data={props.shifts}
+                positionActionsColumn="first"
+                enableRowActions={true}
+                displayColumnDefOptions={{
+                    'mrt-row-actions': {
+                        header: '',
+                        size: 100,
+                    },
+                }}
+                renderRowActions={({row}) => (
+                    <Box sx={{display: 'flex', gap: '1rem'}}>
+                        <Tooltip arrow placement="left">
+                            <InertiaLink
+                                href={row.original.status === STATUS.COMPLETE ?
+                                    route(props.links.show, {shift: row.original.id}) :
+                                    route(props.links.edit, {shift: row.original.id})}>
+                                {row.original.status === STATUS.COMPLETE ? <Visibility/> : <Edit/>}
                             </InertiaLink>
-                        )}
-                    />
-                </div>
+                        </Tooltip>
+                        <Tooltip arrow placement="right">
+                            <InertiaLink
+                                onClick={() => handleDeleteShift(row.original)}>
+                                <Delete/>
+                            </InertiaLink>
+                        </Tooltip>
+                    </Box>
+                )}
+                renderTopToolbarCustomActions={() => (
+                    <InertiaLink className="btn btn-primary"
+                                 href={route(props.links.create)}>
+                        Create new shift
+                    </InertiaLink>
+                )}
+            />
+        </div>
 
 
     </>

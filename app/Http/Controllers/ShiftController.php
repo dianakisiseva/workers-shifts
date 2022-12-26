@@ -25,7 +25,7 @@ class ShiftController extends Controller
     {
         return inertia('Shift/Upload',[
             'links' => [
-                'storeFile' => route('shifts.import')
+                'storeFile' => route('shifts.import.store')
             ]
         ]);
     }
@@ -37,11 +37,17 @@ class ShiftController extends Controller
         $shifts = array_slice(array_map('str_getcsv', file($file)),1);
 
         $this->shiftBLL->importShifts($shifts);
+
+        return response()->json([
+            'message' => 'Shifts successfully imported!'
+        ]);
     }
 
     public function list()
     {
-        $shifts = $this->shiftBLL->get()->take(20);
+        ini_set('max_execution_time', 180);
+
+        $shifts = $this->shiftBLL->getAllShifts();
 
         $shifts->load('worker');
 

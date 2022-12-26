@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\ShiftController::class, 'uploadShifts']);
-
+Route::get('/', [App\Http\Controllers\ShiftController::class, 'uploadShifts']) ->name('shifts.import');
 
 Route::prefix('shifts')
     ->group(function () {
         Route::post('/import', [App\Http\Controllers\ShiftController::class, 'importShifts'])
-            ->name('shifts.import');
+            ->name('shifts.import.store');
         Route::get('/', [App\Http\Controllers\ShiftController::class, 'list'])->name('shifts.list');
         Route::post('/', [App\Http\Controllers\ShiftController::class, 'store'])->name('shifts.store');
         Route::get('/create', [App\Http\Controllers\ShiftController::class, 'create'])->name('shifts.create');
@@ -27,14 +26,12 @@ Route::prefix('shifts')
         Route::put('{shift}', [App\Http\Controllers\ShiftController::class, 'update'])->name('shifts.update');
         Route::get('{shift}/edit', [App\Http\Controllers\ShiftController::class, 'edit'])->name('shifts.edit');
         Route::delete('{shift}', [App\Http\Controllers\ShiftController::class, 'destroy'])->name('shifts.destroy');
-
     });
 
 Route::prefix('workers')
     ->group(function () {
         Route::get('/', [App\Http\Controllers\WorkerController::class, 'list'])->name('workers.list');
         Route::get('{worker}',  [App\Http\Controllers\WorkerController::class, 'show'])->name('workers.show');
-
     });
 
 

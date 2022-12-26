@@ -30,7 +30,9 @@
         "classnames": "^2.3.2",
         "material-react-table": "^1.5.1",
         "moment": "^2.29.4",
+        "react-bootstrap": "^2.7.0",
         "react-datepicker": "^4.8.0",
+        "react-loader-spinner": "^5.3.4",
         "react-modal": "^3.16.1",
         "react-select": "^5.7.0",
         "react-toast-notifications": "^2.5.1"

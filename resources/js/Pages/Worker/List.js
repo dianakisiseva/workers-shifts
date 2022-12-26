@@ -3,11 +3,9 @@ import MaterialReactTable from 'material-react-table';
 import {Box} from '@mui/material';
 import {route} from "../../Shared/route";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import Menu from "../../Shared/Menu";
 
 export default function List(props) {
-
-    console.log(props.workers)
-
     const columns = useMemo(
         () => [
             {
@@ -22,8 +20,8 @@ export default function List(props) {
         ], []
     )
 
-
     return <>
+        <Menu/>
         <div className="table-striped">
             <MaterialReactTable
                 columns={columns}
