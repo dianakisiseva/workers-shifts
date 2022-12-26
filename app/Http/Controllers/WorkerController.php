@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BLL\WorkerBLL;
+use App\Models\Shift;
 use App\Models\Worker;
 
 /**
@@ -32,7 +33,8 @@ class WorkerController extends Controller
     {
         $shifts = $worker->shifts;
 
-        $getLastFivePayments = $shifts->sortByDesc('paid_at')->values()->take(5);
+        $getLastFivePayments = $shifts->where('status', Shift::COMPLETE)
+            ->sortByDesc('paid_at')->values()->take(5);
 
         $averagePayPerHour = $this->workerBLL->getAverageDataByColumn($shifts->toArray(), 'rate_per_hour');
         $averageTotalPay = $this->workerBLL->getAverageDataByColumn($shifts->toArray(), 'total_pay');
